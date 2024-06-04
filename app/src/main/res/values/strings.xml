@@ -1,3 +1,10 @@
 <resources>
     <string name="app_name">apps2324.p4.CarlesHernandez</string>
+    <string name="login">Login</string>
+    <string name="email">email</string>
+    <string name="password">password</string>
+    <string name="register">Register</string>
+    <string name="already_account">Already have an account? Login now</string>
+    <string name="clickto_register">click here to register</string>
+    <string name="logout">Logout</string>
 </resources>

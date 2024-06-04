@@ -1,0 +1,29 @@
+{
+  "project_info": {
+    "project_number": "200440066460",
+    "project_id": "mytodoapp-a3862",
+    "storage_bucket": "mytodoapp-a3862.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:200440066460:android:eddd27e866173b69dad859",
+        "android_client_info": {
+          "package_name": "com.tecnocampus.apps2324p4carleshernandez"
+        }
+      },
+      "oauth_client": [],
+      "api_key": [
+        {
+          "current_key": "AIzaSyB-DP7u7qj05gnR9HuhAdlCM8fLz9j2NDk"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": []
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
