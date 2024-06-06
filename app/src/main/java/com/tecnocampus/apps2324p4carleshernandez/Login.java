@@ -61,19 +61,33 @@ public class Login extends AppCompatActivity {
         buttonLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
                 String email = String.valueOf(editTextEmail.getText());
                 String password = String.valueOf(editTextPassword.getText());
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Login.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    editTextEmail.setError("Email is Required.");
                     return;
+                }
+                else if(!email.contains("@") || !email.contains(".")){
+                    editTextEmail.setError("Invalid Email");
+                    return;
+                }
+                else{
+                    editTextEmail.setError(null);
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(Login.this, "Enter password", Toast.LENGTH_SHORT).show();
+                    editTextPassword.setError("Password is Required.");
                     return;
                 }
+                else if(password.length() < 6){
+                    editTextPassword.setError("Password must be >= 6 Characters");
+                    return;
+                }
+                else{
+                    editTextPassword.setError(null);
+                }
+                progressBar.setVisibility(View.VISIBLE);
 
                 mAuth.signInWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -86,7 +100,7 @@ public class Login extends AppCompatActivity {
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(Login.this, "Authentication failed.",
+                                    Toast.makeText(Login.this, "Authentication failed - Check your credentials or register.",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }

@@ -61,19 +61,33 @@ public class Register extends AppCompatActivity {
         buttonRegister.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                progressBar.setVisibility(View.VISIBLE);
                 String email = String.valueOf(editTextEmail.getText());
                 String password = String.valueOf(editTextPassword.getText());
 
                 if (TextUtils.isEmpty(email)) {
-                    Toast.makeText(Register.this, "Enter email", Toast.LENGTH_SHORT).show();
+                    editTextEmail.setError("Email is Required.");
                     return;
+                }
+                else if(!email.contains("@") || !email.contains(".")){
+                    editTextEmail.setError("Invalid Email");
+                    return;
+                }
+                else{
+                    editTextEmail.setError(null);
                 }
 
                 if (TextUtils.isEmpty(password)) {
-                    Toast.makeText(Register.this, "Enter password", Toast.LENGTH_SHORT).show();
+                    editTextPassword.setError("Password is Required.");
                     return;
                 }
+                else if(password.length() < 6){
+                    editTextPassword.setError("Password must be >= 6 Characters");
+                    return;
+                }
+                else{
+                    editTextPassword.setError(null);
+                }
+                progressBar.setVisibility(View.VISIBLE);
 
                 mAuth.createUserWithEmailAndPassword(email, password)
                         .addOnCompleteListener(new OnCompleteListener<AuthResult>() {
@@ -81,13 +95,13 @@ public class Register extends AppCompatActivity {
                             public void onComplete(@NonNull Task<AuthResult> task) {
                                 progressBar.setVisibility(View.GONE);
                                 if (task.isSuccessful()) {
-                                    Toast.makeText(Register.this, "Authentication created.",
+                                    Toast.makeText(Register.this, "Authentication created - Logging in.",
                                             Toast.LENGTH_SHORT).show();
                                     Intent intent = new Intent(getApplicationContext(), Login.class);
                                     startActivity(intent);
                                     finish();
                                 } else {
-                                    Toast.makeText(Register.this, "Authentication failed.",
+                                    Toast.makeText(Register.this, "Authentication failed - Check your credentials.",
                                             Toast.LENGTH_SHORT).show();
                                 }
                             }
