@@ -7,4 +7,14 @@
     <string name="already_account">Already have an account? Login now</string>
     <string name="clickto_register">click here to register</string>
     <string name="logout">Logout</string>
+    <string name="profile">profile</string>
+    <string name="app_title">My ToDo App</string>
+
+
+    <string name="profile_image_desc">Profile Image</string>
+    <string name="username_placeholder">Username</string>
+    <string name="email_placeholder">email@example.com</string>
+    <string name="edit_profile">Edit Profile</string>
+    <string name="go_back">Go Back</string>
+
 </resources>
