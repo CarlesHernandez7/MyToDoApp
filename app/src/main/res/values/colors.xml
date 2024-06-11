@@ -14,4 +14,9 @@
     <color name="colorTextPrimary">#FFFFFF</color>
     <color name="colorBackground">#FFFFFF</color>
 
+    <color name="red">#BD6666</color>
+    <color name="green">#229954</color>
+    <color name="orange">#D68910</color>
+
+    <color name="custom_edit_text_border_color">#FFFFFF</color>
 </resources>

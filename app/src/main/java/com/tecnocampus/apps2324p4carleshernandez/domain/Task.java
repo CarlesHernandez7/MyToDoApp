@@ -1,22 +1,39 @@
 package com.tecnocampus.apps2324p4carleshernandez.domain;
 
+import androidx.room.ColumnInfo;
+import androidx.room.Embedded;
+import androidx.room.Entity;
+import androidx.room.PrimaryKey;
+
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Date;
 
+@Entity(tableName = "tasks")
 public class Task {
+    @PrimaryKey(autoGenerate = true)
+    @ColumnInfo(name = "id")
+    private long id;
+    @ColumnInfo(name = "title")
     private String title;
+    @ColumnInfo(name = "description")
     private String description;
+    @ColumnInfo(name = "due_date")
     private String dueDate;
+    @ColumnInfo(name = "priority")
     private String priority;
+    @ColumnInfo(name = "is_completed")
     private boolean isCompleted;
+    @ColumnInfo(name = "user_mail")
+    private String userMail;
 
-    public Task(String title, String description, String dueDate, String priority, boolean isCompleted) throws IllegalArgumentException {
+    public Task(String title, String description, String dueDate, String priority, String userMail) throws IllegalArgumentException {
         setTitle(title);
         setDescription(description);
         setDueDate(dueDate);
         setPriority(priority);
-        this.isCompleted = isCompleted;
+        this.isCompleted = false;
+        this.userMail = userMail;
     }
 
     // Getters and Setters with validations
@@ -55,7 +72,7 @@ public class Task {
     }
 
     public void setPriority(String priority) {
-        if (priority == null || (!priority.equals("Low") && !priority.equals("Medium") && !priority.equals("High"))) {
+        if (priority == null || (!priority.equals("Non-Urgent") && !priority.equals("Medium") && !priority.equals("High"))) {
             throw new IllegalArgumentException("Priority must be Low, Medium, or High");
         }
         this.priority = priority;
@@ -79,6 +96,22 @@ public class Task {
         } catch (ParseException e) {
             return false;
         }
+    }
+
+    public long getId() {
+        return id;
+    }
+
+    public String getUserMail() {
+        return userMail;
+    }
+
+    public void setId(long id) {
+        this.id = id;
+    }
+
+    public void setUserMail(String userMail) {
+        this.userMail = userMail;
     }
 }
 

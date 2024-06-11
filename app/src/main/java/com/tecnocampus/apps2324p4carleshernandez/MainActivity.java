@@ -2,25 +2,39 @@ package com.tecnocampus.apps2324p4carleshernandez;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.TextView;
+import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.fragment.app.Fragment;
-import androidx.fragment.app.FragmentManager;
-import androidx.fragment.app.FragmentTransaction;
+import androidx.lifecycle.ViewModelProvider;
+import androidx.recyclerview.widget.GridLayoutManager;
+import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.tecnocampus.apps2324p4carleshernandez.auth.Login;
+import com.tecnocampus.apps2324p4carleshernandez.database.TaskViewModel;
+import com.tecnocampus.apps2324p4carleshernandez.domain.Task;
 
+import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity implements TaskAdapter.OnItemClickListener {
+
+    private TaskAdapter adapter;
+    private RecyclerView recyclerView;
+    private List<Task> taskList;
+    private RecyclerView.LayoutManager layoutManager;
+    private Button buttonCreateTask;
+    TaskViewModel taskViewModel;
+    FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -30,7 +44,40 @@ public class MainActivity extends AppCompatActivity {
 
         Objects.requireNonNull(getSupportActionBar()).setTitle(getString(R.string.app_title));
 
+        taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
+        taskViewModel.init(user.getEmail());
 
+        this.buttonCreateTask = findViewById(R.id.btn_add_task);
+        this.buttonCreateTask.setOnClickListener(v -> {
+            Intent intent = new Intent(this, CreateTaskActivity.class);
+            startActivity(intent);
+        });
+
+        this.taskList = new ArrayList<>();
+        this.recyclerView = findViewById(R.id.rv_tasks);
+        this.layoutManager = new GridLayoutManager(this, 2);
+        this.recyclerView.setLayoutManager(layoutManager);
+
+        this.adapter = new TaskAdapter(this);
+        this.adapter.setClickListener(this);
+
+        this.taskViewModel.getAllTasks().observe(this, tasks -> {
+            taskList = tasks;
+            adapter.setTasks(taskList);
+            recyclerView.setAdapter(adapter);
+        });
+    }
+
+    @Override
+    public void onClick(View view, int position) {
+        Task task = taskList.get(position);
+
+        Intent intent = new Intent(this, DetailActivity.class);
+        intent.putExtra("title", task.getTitle());
+        intent.putExtra("description", task.getDescription());
+        intent.putExtra("dueDate", task.getDueDate());
+        intent.putExtra("priority", task.getPriority());
+        startActivity(intent);
     }
 
     @Override
@@ -40,20 +87,20 @@ public class MainActivity extends AppCompatActivity {
         return true;
     }
 
+
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
         if (item.getItemId() == R.id.profile) {
-            changeFragment(ProfileFragment.newInstance());
-            return true;
+            FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
+            Intent intent;
+            if (user != null) {
+                intent = new Intent(this, ProfileActivity.class);
+            } else {
+                intent = new Intent(this, Login.class);
+            }
+            startActivity(intent);
         }
         return super.onOptionsItemSelected(item);
     }
 
-    public void changeFragment(Fragment fragment) {
-        FragmentManager fm = getSupportFragmentManager();
-        FragmentTransaction ft = fm.beginTransaction();
-
-        ft.replace(R.id.fLayoutMainActFragmentList, fragment);
-        ft.commit();
-    }
 }

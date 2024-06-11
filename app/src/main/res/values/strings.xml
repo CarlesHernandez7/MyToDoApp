@@ -10,17 +10,26 @@
     <string name="profile">profile</string>
     <string name="app_title">My ToDo App</string>
 
-
     <string name="profile_image_desc">Profile Image</string>
     <string name="username_placeholder">Username</string>
     <string name="email_placeholder">email@example.com</string>
     <string name="edit_profile">Edit Profile</string>
     <string name="go_back">Go Back</string>
-    <!-- TODO: Remove or change this placeholder text -->
     <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="my_tasks">My Tasks</string>
     <string name="add_task">Add Task</string>
     <string name="task_title">Task Title</string>
     <string name="task_description">Task Description</string>
+    <string name="title">Title</string>
+    <string name="description">Description</string>
+    <string name="due_date">Due Date</string>
+    <string name="priority">Priority</string>
+    <string name="completed">Completed</string>
+    <string name="close">Close</string>
+    <string name="share">Share</string>
+    <string name="new_task">New Task</string>
+    <string name="due_date_yyyy_mm_dd">Due Date (YYYY-MM-DD)</string>
+    <string name="save">Save</string>
+    <string name="cancel">Cancel</string>
 
 </resources>
