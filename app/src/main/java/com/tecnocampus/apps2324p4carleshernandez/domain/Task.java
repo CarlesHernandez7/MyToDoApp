@@ -1,4 +1,4 @@
-package com.tecnocampus.apps2324p4carleshernandez;
+package com.tecnocampus.apps2324p4carleshernandez.domain;
 
 import java.text.ParseException;
 import java.text.SimpleDateFormat;
