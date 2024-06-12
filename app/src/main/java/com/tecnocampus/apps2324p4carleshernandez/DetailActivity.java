@@ -27,9 +27,7 @@ public class DetailActivity extends AppCompatActivity {
     private TextView tvTitle, tvDescription, tvDueDate, tvPriority;
     private Switch switchIsCompleted;
     private long id;
-
     TaskViewModel taskViewModel;
-
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
@@ -71,27 +69,11 @@ public class DetailActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 boolean isCompleted = switchIsCompleted.isChecked();
-                Log.d("DetailActivity", "Task completed: " + isCompleted);
-                Log.d("WEEEEEEEEP", "Task completed: " + isCompleted);
-                //Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-                //startActivity(intent);
-                Intent intent = new Intent();
-                intent.putExtra("id", id);
-                Log.d("WEEEEEEEEP", "Task completed: " + id);
-                String prova = "";
-                if (isCompleted) {
-                    prova = "true";
-                } else {
-                    prova = "false";
-                }
-                intent.putExtra("isCompleted", prova);
-                Log.d("WEEEEEEEEP", "Task completed: " + prova);
-                setResult(RESULT_OK, intent);
+                if (isCompleted) taskViewModel.delete(id);
                 finish();
             }
         });
     }
-
 
     private void shareTaskDetails() {
         String completedText = switchIsCompleted.isChecked() ? "Yes" : "No";

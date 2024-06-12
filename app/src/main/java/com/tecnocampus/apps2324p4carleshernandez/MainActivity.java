@@ -36,8 +36,6 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
     private RecyclerView.LayoutManager layoutManager;
     private Button buttonCreateTask;
     TaskViewModel taskViewModel;
-    private ActivityResultLauncher<Intent> activityResultLauncher;
-
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
@@ -65,37 +63,11 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
         this.adapter = new TaskAdapter(this);
         this.adapter.setClickListener(this);
 
-        this.activityResultLauncher = registerForActivityResult(new ActivityResultContracts.StartActivityForResult(),
-                o -> {
-                    Log.d("BBBBBBBBB", "Task completed: " + o.getResultCode());
-                    if (o.getResultCode() == RESULT_OK) {
-                        String isCompleted = o.getData().getStringExtra("isCompleted");
-                        Log.d("AAAAAAAAAAAA", "Task completed: " + isCompleted);
-                        if (isCompleted.equals("true")) {
-                            long id = o.getData().getLongExtra("id", -1);
-                            Log.d("AAAAAAAAAAAA", "Task completed: " + id);
-                            Task task = getTask(id);
-                            Log.d("AAAAAAAAAAAA", "Task completed: " + task.getId());
-                            taskList.remove(task);
-                            this.adapter.notifyDataSetChanged();
-                        }
-                    }
-                });
-
         this.taskViewModel.getAllTasks().observe(this, tasks -> {
             taskList = tasks;
             adapter.setTasks(taskList);
             recyclerView.setAdapter(adapter);
         });
-    }
-
-    public Task getTask(long id) {
-        for (Task t: this.taskList){
-            if(t.getId() == id){
-                return t;
-            }
-        }
-        return null;
     }
 
     @Override
@@ -108,7 +80,7 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
         intent.putExtra("description", task.getDescription());
         intent.putExtra("dueDate", task.getDueDate());
         intent.putExtra("priority", task.getPriority());
-        this.activityResultLauncher.launch(intent);
+        startActivity(intent);
     }
 
     @Override
@@ -117,7 +89,6 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
         inflater.inflate(R.menu.main_menu, menu);
         return true;
     }
-
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {

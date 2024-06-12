@@ -33,7 +33,7 @@ public class TaskRepository {
         return taskDao.getTaskById(id);
     }
 
-    public void delete(Task task){
-        RoomDatabase.databaseWriteExecutor.execute(() -> taskDao.delete(task));
+    public void delete(long id){
+        RoomDatabase.databaseWriteExecutor.execute(() -> taskDao.delete(id));
     }
 }
