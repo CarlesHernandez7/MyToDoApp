@@ -1,0 +1,37 @@
+<resources>
+    <string name="app_name">apps2324.p4.CarlesHernandez</string>
+    <string name="login">Iniciar Sesión</string>
+    <string name="email">Correo Electrónico</string>
+    <string name="password">Contraseña</string>
+    <string name="register">Registrarse</string>
+    <string name="already_account">¿Ya tienes una cuenta? Inicia sesión ahora</string>
+    <string name="clickto_register">haz clic aquí para registrarte</string>
+    <string name="logout">Cerrar Sesión</string>
+    <string name="profile">Perfil</string>
+    <string name="app_title">Mi App de Tareas</string>
+    <string name="profile_image_desc">Imagen de Perfil</string>
+    <string name="username_placeholder">Nombre de Usuario</string>
+    <string name="email_placeholder">correo@ejemplo.com</string>
+    <string name="edit_profile">Editar Perfil</string>
+    <string name="go_back">Regresar</string>
+    <string name="hello_blank_fragment">Hola fragmento en blanco</string>
+    <string name="my_tasks">Mis Tareas</string>
+    <string name="add_task">Agregar Tarea</string>
+    <string name="task_title">Título de la Tarea</string>
+    <string name="task_description">Descripción de la Tarea</string>
+    <string name="title">Título</string>
+    <string name="description">Descripción</string>
+    <string name="due_date">Fecha de Vencimiento</string>
+    <string name="priority">Prioridad</string>
+    <string name="completed">Completado</string>
+    <string name="close">Cerrar</string>
+    <string name="share">Compartir</string>
+    <string name="new_task">Nueva Tarea</string>
+    <string name="due_date_yyyy_mm_dd">Fecha de Vencimiento (AAAA-MM-DD)</string>
+    <string name="save">Guardar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="quote">Cita</string>
+    <string name="author">Autor</string>
+    <string name="don_t_give_up">¡No te rindas!</string>
+    <string name="motivation">Motivación</string>
+</resources>

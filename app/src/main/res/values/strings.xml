@@ -9,7 +9,6 @@
     <string name="logout">Logout</string>
     <string name="profile">profile</string>
     <string name="app_title">My ToDo App</string>
-
     <string name="profile_image_desc">Profile Image</string>
     <string name="username_placeholder">Username</string>
     <string name="email_placeholder">email@example.com</string>
