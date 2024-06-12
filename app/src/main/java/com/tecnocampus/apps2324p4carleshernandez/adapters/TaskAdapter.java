@@ -1,16 +1,16 @@
-package com.tecnocampus.apps2324p4carleshernandez;
+package com.tecnocampus.apps2324p4carleshernandez.adapters;
 
 import android.content.Context;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.LinearLayout;
 import android.widget.TextView;
 
 import androidx.annotation.NonNull;
 import androidx.recyclerview.widget.RecyclerView;
 
+import com.tecnocampus.apps2324p4carleshernandez.R;
 import com.tecnocampus.apps2324p4carleshernandez.domain.Task;
 
 import java.util.ArrayList;

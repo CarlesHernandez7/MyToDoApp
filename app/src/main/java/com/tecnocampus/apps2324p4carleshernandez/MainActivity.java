@@ -2,17 +2,13 @@ package com.tecnocampus.apps2324p4carleshernandez;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.Button;
-import android.widget.LinearLayout;
 
 import androidx.activity.EdgeToEdge;
-import androidx.activity.result.ActivityResultLauncher;
-import androidx.activity.result.contract.ActivityResultContracts;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.lifecycle.ViewModelProvider;
 import androidx.recyclerview.widget.GridLayoutManager;
@@ -20,6 +16,7 @@ import androidx.recyclerview.widget.RecyclerView;
 
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.tecnocampus.apps2324p4carleshernandez.adapters.TaskAdapter;
 import com.tecnocampus.apps2324p4carleshernandez.auth.Login;
 import com.tecnocampus.apps2324p4carleshernandez.database.TaskViewModel;
 import com.tecnocampus.apps2324p4carleshernandez.domain.Task;
@@ -102,6 +99,11 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
             }
             startActivity(intent);
         }
+        if (item.getItemId() == R.id.motivation) {
+            Intent intent = new Intent(this, MotivationActivity.class);
+            startActivity(intent);
+        }
+
         return super.onOptionsItemSelected(item);
     }
 
