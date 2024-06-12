@@ -26,7 +26,10 @@ public class DetailActivity extends AppCompatActivity {
 
     private TextView tvTitle, tvDescription, tvDueDate, tvPriority;
     private Switch switchIsCompleted;
-    private Task task;
+    private long id;
+
+    TaskViewModel taskViewModel;
+
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
 
     @Override
@@ -44,13 +47,18 @@ public class DetailActivity extends AppCompatActivity {
         Button btnShare = findViewById(R.id.btnShare);
         Button btnClose = findViewById(R.id.btnClose);
 
-        task = getTask();
+        taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
+        taskViewModel.init(user.getEmail());
 
-        tvTitle.setText(task.getTitle());
-        tvDescription.setText(task.getDescription());
-        tvDueDate.setText(task.getDueDate());
-        tvPriority.setText(task.getPriority());
-        switchIsCompleted.setChecked(task.isCompleted());
+        Intent intent = getIntent();
+
+        id = intent.getLongExtra("id", -1);
+        tvTitle.setText(intent.getStringExtra("title"));
+        tvDescription.setText(intent.getStringExtra("description"));
+        tvDueDate.setText(intent.getStringExtra("dueDate"));
+        tvPriority.setText(intent.getStringExtra("priority"));
+        switchIsCompleted.setChecked(intent.getBooleanExtra("isCompleted", false));
+
 
         btnShare.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -65,30 +73,33 @@ public class DetailActivity extends AppCompatActivity {
                 boolean isCompleted = switchIsCompleted.isChecked();
                 Log.d("DetailActivity", "Task completed: " + isCompleted);
                 Log.d("WEEEEEEEEP", "Task completed: " + isCompleted);
-                Intent intent = new Intent(DetailActivity.this, MainActivity.class);
-                startActivity(intent);
+                //Intent intent = new Intent(DetailActivity.this, MainActivity.class);
+                //startActivity(intent);
+                Intent intent = new Intent();
+                intent.putExtra("id", id);
+                Log.d("WEEEEEEEEP", "Task completed: " + id);
+                String prova = "";
+                if (isCompleted) {
+                    prova = "true";
+                } else {
+                    prova = "false";
+                }
+                intent.putExtra("isCompleted", prova);
+                Log.d("WEEEEEEEEP", "Task completed: " + prova);
+                setResult(RESULT_OK, intent);
+                finish();
             }
         });
     }
 
-    private Task getTask() {
-
-        Intent intent = getIntent();
-        String title = intent.getStringExtra("title");
-        String description = intent.getStringExtra("description");
-        String dueDate = intent.getStringExtra("dueDate");
-        String priority = intent.getStringExtra("priority");
-
-        return new Task(title, description, dueDate, priority, user.getEmail());
-    }
 
     private void shareTaskDetails() {
         String completedText = switchIsCompleted.isChecked() ? "Yes" : "No";
         String shareContent = "Task Details:\n\n" +
-                "Title: " + task.getTitle() + "\n" +
-                "Description: " + task.getDescription() + "\n" +
-                "Due Date: " + task.getDueDate() + "\n" +
-                "Priority: " + task.getPriority() + "\n" +
+                "Title: " + tvTitle.toString() + "\n" +
+                "Description: " + tvDescription.toString() + "\n" +
+                "Due Date: " + tvDueDate.toString() + "\n" +
+                "Priority: " + tvPriority.toString() + "\n" +
                 "Completed: " + completedText;
 
         Intent sendIntent = new Intent();

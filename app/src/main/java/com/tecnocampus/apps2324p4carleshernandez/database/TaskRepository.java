@@ -32,4 +32,8 @@ public class TaskRepository {
     public LiveData<Task> getTaskById(long id) {
         return taskDao.getTaskById(id);
     }
+
+    public void delete(Task task){
+        RoomDatabase.databaseWriteExecutor.execute(() -> taskDao.delete(task));
+    }
 }

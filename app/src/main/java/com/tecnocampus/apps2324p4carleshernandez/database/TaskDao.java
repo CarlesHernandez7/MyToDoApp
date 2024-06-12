@@ -16,6 +16,9 @@ public interface TaskDao {
     @Insert
     void insert(Task task);
 
+    @Delete
+    void delete(Task task);
+
     @Query("SELECT *  FROM tasks WHERE user_mail = :mail ORDER BY priority ASC")
     LiveData<List<Task>> getAllTasksByGmail(String mail);
 

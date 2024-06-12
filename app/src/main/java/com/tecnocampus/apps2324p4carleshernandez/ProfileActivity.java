@@ -20,7 +20,6 @@ public class ProfileActivity extends AppCompatActivity {
     private TextView tvEmail;
     private FirebaseUser user;
 
-    SharedPreferences sharedPreferences;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -36,10 +35,6 @@ public class ProfileActivity extends AppCompatActivity {
                     .setMessage("Are you sure you want to logout?")
                     .setPositiveButton("Yes", (dialog, which) -> {
                         FirebaseAuth.getInstance().signOut();
-                        sharedPreferences = getSharedPreferences("MyPrefs", MODE_PRIVATE);
-                        SharedPreferences.Editor editor = sharedPreferences.edit();
-                        editor.putBoolean("isLoggedIn", false);
-                        editor.apply();
                         Intent intent = new Intent(ProfileActivity.this, Login.class);
                         startActivity(intent);
                         finish();

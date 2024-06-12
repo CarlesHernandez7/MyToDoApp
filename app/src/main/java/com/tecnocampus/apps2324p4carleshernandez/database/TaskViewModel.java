@@ -37,4 +37,8 @@ public class TaskViewModel extends AndroidViewModel {
     public LiveData<Task> getTaskById(long id) {
         return taskRepository.getTaskById(id);
     }
+
+    public void delete(Task task){
+        taskRepository.delete(task);
+    }
 }
