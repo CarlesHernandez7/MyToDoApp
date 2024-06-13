@@ -48,7 +48,6 @@ public class CreateTaskActivity extends AppCompatActivity {
         taskViewModel = new ViewModelProvider(this).get(TaskViewModel.class);
         taskViewModel.init(user.getEmail());
 
-        // Set up the spinner for priority
         ArrayAdapter<CharSequence> adapter = ArrayAdapter.createFromResource(this,
                 R.array.priority_array, android.R.layout.simple_spinner_item);
         adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
@@ -70,7 +69,7 @@ public class CreateTaskActivity extends AppCompatActivity {
         }
 
         if (description.isEmpty()) {
-            description = "null";
+            description = "none";
         }
 
         if (!isValidDate(dueDate)) {
@@ -87,7 +86,6 @@ public class CreateTaskActivity extends AppCompatActivity {
     }
 
     private boolean isValidDateFormat(String date) {
-        // Regular expression to check if the date is in yyyy-MM-dd format
         String regex = "^(\\d{4})-(\\d{2})-(\\d{2})$";
         return date.matches(regex);
     }
@@ -98,10 +96,10 @@ public class CreateTaskActivity extends AppCompatActivity {
         }
 
         SimpleDateFormat sdf = new SimpleDateFormat("yyyy-MM-dd");
-        sdf.setLenient(false); // Disable lenient parsing
+        sdf.setLenient(false);
 
         try {
-            sdf.parse(date); // Attempt to parse the date
+            sdf.parse(date);
             return true;
         } catch (ParseException e) {
             return false;

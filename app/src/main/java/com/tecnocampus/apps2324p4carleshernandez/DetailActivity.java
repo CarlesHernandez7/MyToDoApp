@@ -2,7 +2,6 @@ package com.tecnocampus.apps2324p4carleshernandez;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.util.Log;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
@@ -19,7 +18,6 @@ import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.tecnocampus.apps2324p4carleshernandez.auth.Login;
 import com.tecnocampus.apps2324p4carleshernandez.database.TaskViewModel;
-import com.tecnocampus.apps2324p4carleshernandez.domain.Task;
 
 public class DetailActivity extends AppCompatActivity {
 

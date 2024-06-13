@@ -13,6 +13,7 @@ import java.util.concurrent.Executors;
 @Database(entities = {Task.class}, version = 1)
 public abstract class RoomDatabase extends androidx.room.RoomDatabase {
     public abstract TaskDao taskDao();
+
     private static final int NUMBER_OF_THREADS = 4;
     static final ExecutorService databaseWriteExecutor =
             Executors.newFixedThreadPool(NUMBER_OF_THREADS);

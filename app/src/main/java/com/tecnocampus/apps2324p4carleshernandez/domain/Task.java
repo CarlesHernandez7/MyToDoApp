@@ -1,7 +1,6 @@
 package com.tecnocampus.apps2324p4carleshernandez.domain;
 
 import androidx.room.ColumnInfo;
-import androidx.room.Embedded;
 import androidx.room.Entity;
 import androidx.room.PrimaryKey;
 

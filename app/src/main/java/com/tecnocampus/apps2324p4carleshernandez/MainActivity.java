@@ -1,6 +1,7 @@
 package com.tecnocampus.apps2324p4carleshernandez;
 
 import android.content.Intent;
+import android.content.res.Configuration;
 import android.os.Bundle;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -30,7 +31,6 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
     private TaskAdapter adapter;
     private RecyclerView recyclerView;
     private List<Task> taskList;
-    private RecyclerView.LayoutManager layoutManager;
     private Button buttonCreateTask;
     TaskViewModel taskViewModel;
     FirebaseUser user = FirebaseAuth.getInstance().getCurrentUser();
@@ -54,8 +54,8 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
 
         this.taskList = new ArrayList<>();
         this.recyclerView = findViewById(R.id.rv_tasks);
-        this.layoutManager = new GridLayoutManager(this, 2);
-        this.recyclerView.setLayoutManager(layoutManager);
+
+        setLayoutManager(getResources().getConfiguration().orientation);
 
         this.adapter = new TaskAdapter(this);
         this.adapter.setClickListener(this);
@@ -65,6 +65,18 @@ public class MainActivity extends AppCompatActivity implements TaskAdapter.OnIte
             adapter.setTasks(taskList);
             recyclerView.setAdapter(adapter);
         });
+    }
+
+    private void setLayoutManager(int orientation) {
+        int spanCount = (orientation == Configuration.ORIENTATION_LANDSCAPE) ? 4 : 2;
+        GridLayoutManager layoutManager = new GridLayoutManager(this, spanCount);
+        recyclerView.setLayoutManager(layoutManager);
+    }
+
+    @Override
+    public void onConfigurationChanged(Configuration newConfig) {
+        super.onConfigurationChanged(newConfig);
+        setLayoutManager(newConfig.orientation);
     }
 
     @Override

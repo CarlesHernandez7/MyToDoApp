@@ -23,7 +23,7 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
     Context context;
 
     public TaskAdapter(Context context) {
-        tasks=new ArrayList<>();
+        tasks = new ArrayList<>();
         this.context = context;
     }
 
@@ -53,11 +53,9 @@ public class TaskAdapter extends RecyclerView.Adapter<TaskAdapter.ViewHolder> {
         // Set background color based on priority
         if ("Non-Urgent".equals(task.getPriority())) {
             holder.layout.setBackgroundColor(context.getResources().getColor(R.color.green));
-        }
-        else if("Medium".equals(task.getPriority())) {
+        } else if ("Medium".equals(task.getPriority())) {
             holder.layout.setBackgroundColor(context.getResources().getColor(R.color.orange));
-        }
-        else {
+        } else {
             holder.layout.setBackgroundColor(context.getResources().getColor(R.color.red));
         }
 

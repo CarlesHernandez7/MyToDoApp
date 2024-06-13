@@ -14,8 +14,8 @@ public class TaskViewModel extends AndroidViewModel {
     private TaskRepository taskRepository;
     private LiveData<List<Task>> taskList;
 
-    public TaskViewModel(Application application){
-            super(application);
+    public TaskViewModel(Application application) {
+        super(application);
     }
 
     public void init(String mail) {
@@ -38,7 +38,7 @@ public class TaskViewModel extends AndroidViewModel {
         return taskRepository.getTaskById(id);
     }
 
-    public void delete(long id){
+    public void delete(long id) {
         taskRepository.delete(id);
     }
 }
